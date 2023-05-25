@@ -1,4 +1,3 @@
-
 import http from "http";
 import express from "express"; 
 import SocketIO from "socket.io";
@@ -12,7 +11,6 @@ app.get("/", (req, res) => res.render("home"));
 app.get("/*", (req, res) => res.redirect("/"));
 
 const httpServer = http.createServer(app); // 서버 생성
-
 const wsServer = SocketIO(httpServer); // 소켓 서버랑 합치기
 
 // 소켓 연결 시

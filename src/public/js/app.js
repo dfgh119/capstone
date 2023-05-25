@@ -1,23 +1,24 @@
-
 const socket = io();
 const myFace = document.getElementById("myFace");
 const muteBtn = document.getElementById("mute");
 const cameraBtn = document.getElementById("camera");
 const camerasSelect = document.getElementById("cameras");
 const call = document.getElementById("call");
+
 call.hidden = true;
+
 let myStream;
-let muted = false;
-let cameraOff = false;
-let roomName;
-let myPeerConnection;
-let myDataChannel;
+let muted = false;      //초기설정 음소거 하지않기 
+let cameraOff = false;  //초기설정 카메라는 나오게
+let roomName;           //방 이름
+let myPeerConnection; 
+let myDataChannel;      
 
 async function getCameras() {
   try {
-    const devices = await navigator.mediaDevices.enumerateDevices();
-    const cameras = devices.filter((device) => device.kind === "videoinput");
-    const currentCamera = myStream.getVideoTracks()[0];
+    const devices = await navigator.mediaDevices.enumerateDevices();          //await 처리될때까지 함수 실행을 기다림
+    const cameras = devices.filter((device) => device.kind === "videoinput"); //카메라 설정
+    const currentCamera = myStream.getVideoTracks()[0];                       //카메라 스택
     cameras.forEach((camera) => {
       const option = document.createElement("option");
       option.value = camera.deviceId;
